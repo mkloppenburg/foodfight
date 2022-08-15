@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {% trans "Profile for: " %} {{ player }}
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "Welcome"%} <a href="{% url 'player_profile' player.id %}">{{ player }}!</a></h1>
+<p class="small"><a href="{% url 'player_profile' player.id %}" class="small">{% trans "[View profile]" %}</a></p>
+{% blocktrans %}
+<p>Welcome to our little game. On the left you can find our menu. There you can select wether you want to start a game, or find someone to talk to. Have fun!</p>
+<p>If you want to rank up, you might need the following information:</p>{% endblocktrans %}
+{% if rank_list %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{% trans "Rank" %}</th>
+            <th>{% trans "Description" %}</th>
+            <th>{% trans "Games needed" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for rank in rank_list %}
+    <tr>
+        <td>
+            {{ rank.rank }}
+        </td>
+        <td>
+            {{ rank.rank_decription }}
+        </td>
+        <td>
+            {{ rank.games_needed }}
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>{% trans "Could not load rank information." %}</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {% trans "All players" %}
+{% endblock %}
+
+
+{% block content %}
+<h1>{% trans "All players" %}</h1>
+{% if players_list %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{% trans "Player name" %}</th>
+            <th>{% trans "Rank" %}</th>
+            <th>{% trans "Alive?" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for player in players_list %}
+    <tr>
+        <td>
+            <a href="{% url 'player_profile' player.id %}">{{ player.player }}</a>
+        </td>
+        <td>
+            {{ player.rank.rank_decription }}
+        </td>
+        {% if player.alive is True %}
+        <td>
+            Yes
+        </td>
+        {% else %}
+        <td>
+            No
+        </td>
+        {% endif %}
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>{% trans "Could not load players list." %}</p>
+{% endif %}
+{% endblock %}
