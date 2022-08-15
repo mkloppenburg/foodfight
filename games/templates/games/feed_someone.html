@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {% trans "Feed someone" %}
+{% endblock %}
+
+
+{% block content %}
+<h1>{% trans "Feed someone" %}</h1>
+{% blocktrans %}
+<p>Feed someone to try and get them to overeat and choke... We know, it's not nice, but people really should pay attention to what they're eating, right?</p>
+<p>You can use the items you've won by playing games to feed others. If you can successfully make someone eat too much, will depend on your items (You'll need at least -100) and your rank and experience.</p>
+{% endblocktrans %}
+{% if has_items is True %}
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="{% trans "Feed" %} &raquo;"/>
+</form>
+{% else %}
+<p>{% trans "You have no items to use! Go play some games." %}</p>
+{% endif %}
+{% endblock %}
