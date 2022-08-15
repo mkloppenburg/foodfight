@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {% trans "You have died!" %}
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "Oh no,"%} {{ player }}!</h1>
+{% blocktrans %}
+<p>Unfortunately this is the end of the road. After eating waaaaay to much and becoming morbidly obese... you died.</p>
+
+<p>Now there is only one thing left to do. Accept your demise and get a new account for some payback!</p>
+<p>So do you agree this is it?</p>
+{% endblocktrans %}
+<a href="{% url 'terminate_player' %}">{% trans "You made me cry, but OK!"%}</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {% trans "Create player"%}
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "Create a player" %}</h1>
+{% if message %}
+    <div>
+        {{ message }}
+    </div>
+{% endif %}
+<form action="{% url 'create_player' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit"/>
+</form>
+{% endblock %}
